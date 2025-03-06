@@ -1,11 +1,13 @@
 # R Code for visualizing satellite data
 
+# install.packages("viridis")
 # install.packages("devtools")
 library(devtools)
 install_github("ducciorocchini/imageRy")
 
 library(terra)
 library(imageRy)
+library(viridis)
 
 # Listing files
 im.list() # tutte le funzioni di imageRy iniziano con im.
@@ -66,4 +68,37 @@ plot(b3)
 plot(b4)
 plot(b8)
 
+cl = colorRampPalette(c("black", "light grey"))(100)
+plot(b2, col=cl)
+plot(b3, col=cl)
+plot(b4, col=cl)
+plot(b8, col=cl)
+
+cl = colorRampPalette(c("black", "light grey"))(2)
+plot(b2, col=cl)
+plot(b3, col=cl)
+plot(b4, col=cl)
+plot(b8, col=cl)
+
+sent = c(b2,b3,b4,b8)
+plot(sent, col=cl)
+
+names(sent) = c("b2blue", "b3green", "b4red", "b8NIR")
+sent
+dev,off()
+plot(sent$b8NIR) # plotto solo una banda
+
+plot(sent[[4]])
+
+# Importing several bands altogether
+sentdol = im.import("sentinel.dolomites")
+
 # How to import several sets altogether
+pairs(sentdol)
+
+# viridis
+plot(sentdol, col=viridis(100))
+plot(sentdol, col=mako(100))
+plot(sentdol, col=magma(100))
+
+# Viridis colors: link
