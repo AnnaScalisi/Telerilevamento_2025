@@ -95,10 +95,39 @@ sentdol = im.import("sentinel.dolomites")
 
 # How to import several sets altogether
 pairs(sentdol)
-
+plot(sentdol[[1]]) # plot solo della prima banda
+plot(sentdol[[4]], col=inferno(100))
 # viridis
 plot(sentdol, col=viridis(100))
 plot(sentdol, col=mako(100))
 plot(sentdol, col=magma(100))
 
 # Viridis colors: link
+
+nlyr(sentdol) # numero di layer
+ncell(sentdol) # numero totale di pixel
+ncell(sentdol) * nlyr(sentdol)
+
+# Layers
+# 1 = blue (b2)
+# 2 = green (b3)
+# 3 = red (b4)
+# 4 = NIR (b8)
+
+# Natural colors associamo ad ogni componente del sistema rgb la banda corrispondente, visualizzazione nel visibile
+im.plotRGB(sentdol, r=3, g=2, b=1) # faccio un plot con i colori rosso giallo e blu, funzione di imageRy (tutte le funzioni di questo pacchetto iniziano per im.)
+
+# False colors
+im.plotRGB(sentdol, r=4, g=3, b=2) # tutte le piante saranno rosse. NIR=842nm estendiamo la visione al NIR. Si vedono le praterie di alta quota e vediamo con una alta risoluzione la vegetazione.
+
+# Exercise: plot the image using the NIR ontop of the green component of the RGB scheme
+im.plotRGB(sentdol, r=3, g=4, b=1) # verde vegetazione riflettanza in infrarosso. Il NIR fa variare il colore.
+
+im.multiframe(1, 2)
+im.plotRGB(sentdol, r=3, g=4, b=1)
+im.plotRGB(sentdol, r=2, g=4, b=1)
+
+dev.off()
+im.plotRGB(sentdol, r=3, g=2, b=4) # aree con suolo nudo che diventano gialle
+
+
