@@ -75,19 +75,19 @@ plot(dvi2006, col=magma(100))
 # minimum: (NIR - red) / (NIR + red) = (0 - 255) / (0 + 255) = -1
 
 # NDVI 4 bit: range (0-15)
-# maximum: (NIR - red) / (NIR + red) = (15 - 0) / (255 + 0) = 1
-# minimum: (NIR - red) / (NIR + red) = (0 - 255) / (0 + 255) = -1
+# maximum: (NIR - red) / (NIR + red) = (15 - 0) / (15 + 0) = 1
+# minimum: (NIR - red) / (NIR + red) = (0 - 15) / (0 + 15) = -1
 
-# NDVI 3 bit: range (0-15)
-# maximum: (NIR - red) / (NIR + red) = (15 - 0) / (255 + 0) = 1
-# minimum: (NIR - red) / (NIR + red) = (0 - 255) / (0 + 255) = -1
+# NDVI 3 bit: range (0-7)
+# maximum: (NIR - red) / (NIR + red) = (7 - 0) / (7 + 0) = 1
+# minimum: (NIR - red) / (NIR + red) = (0 - 7) / (0 + 7) = -1
 
 ndvi1992 = (mato1992[[1]] - mato1992[[2]]) / (mato1992[[1]] + mato1992[[2]])
-# ndvi1992 = dvi1992 / (mato1992
+# ndvi1992 = dvi1992 / (mato1992[[1]] + mato1992[[2]])
 plot(ndvi1992)
 
 ndvi2006 = (mato2006[[1]] - mato2006[[2]]) / (mato2006[[1]] + mato2006[[2]])
-# ndvi2006 = dvi2006 / (mato2006
+# ndvi2006 = dvi2006 / (mato2006[[1]] + mato2006[[2]])
 plot(ndvi2006)
 
 # Functions from imageRy
