@@ -1,9 +1,12 @@
 # R code for multitemporal analysis
 
+install.packages("ggridges") # this is needed to create ridgelines plots
 library(imageRy)
 library(terra)
 library(viridis)
+library(ggridges)
 
+# Listing the data
 im.list()
 
 EN_01 = im.import("EN_01.png") # Ossido di azoto del traffico veicolare monitorati da copernicus ESA di gennaio
@@ -33,6 +36,11 @@ grdif = gr[[1]] - gr[[4]] # 2015 - 2000
 plot(grdif)
 # All the yellow parts are those in which there is a higher value in 2015
 plot(grdif, col=rocket(100))
+
+# Ridgeline plots
+im.ridgeline(gr, scale=1) # Prende tutti i pixel e fa le frequenze di ogni pixel basato su pacchetto ggplot2, aggiungo un dataset a una funzione e una scala
+im.ridgeline(gr, scale=2)
+im.ridgeline(gr, scale=2, palette="inferno") # Aggiungo il colore
 
 
 
