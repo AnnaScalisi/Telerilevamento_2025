@@ -15,7 +15,7 @@ grdif = gr[[4]] - gr[[1]]
 
 This will create the following putput image:
 
-<img src="../Pics/output.jpeg" width=100% />
+<img src="Pics/output.jpeg" width=100% />
 
 > Note 1: If you want to put a pdf files you can rely on:
 
