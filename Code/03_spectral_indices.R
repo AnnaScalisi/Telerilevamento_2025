@@ -1,4 +1,4 @@
-# Code to calculate spectral indices from satellite images
+# Code for calculating spectral indices from satellite images in R
 
 library(imageRy) # beloved package developed at unibo
 library(terra)
@@ -8,12 +8,12 @@ im.list()
 
 mato1992 = im.import("matogrosso_l5_1992219_lrg.jpg") # Satellite Landsat 5
 mato1992 = flip(mato1992) # per ruotare l'immagine
+plot(mato1992)
 
 # 1 = NIR
 # 2 = red
 # 3 = green
 
-plot(mato1992)
 im.plotRGB(mato1992, r=1, g=2, b=3) # Rio Pexoto, stretch si vede meglio la differenziazione tra gli oggetti. Il rosso è foresta pluviale.
 im.plotRGB(mato1992, r=2, g=1, b=3) # Vegetazione verde, suolo nudo rosa.
 im.plotRGB(mato1992, r=2, g=3, b=1) # Enfatizzo il suolo nudo e l'acqua in giallo, tutto quello che non è vegetazione.
@@ -21,7 +21,9 @@ im.plotRGB(mato1992, r=2, g=3, b=1) # Enfatizzo il suolo nudo e l'acqua in giall
 # Import the 2006 image of the Mato Grosso area
 mato2006 = im.import("matogrosso_ast_2006209_lrg.jpg") # Satellite Aster risoluzione spaziale di 15m
 
-im.multiframe(1, 2)
+im.plotRGB(mato2006, r=1, g=2, b=3)
+
+im.multiframe(1,2)
 im.plotRGB(mato1992, r=2, g=3, b=1, title="Mato Grosso 1992")
 im.plotRGB(mato2006, r=2, g=3, b=1, title="Mato Grosso 2006")
 
