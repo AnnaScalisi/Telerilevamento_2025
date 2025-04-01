@@ -1,10 +1,10 @@
-# R code for multitemporal analysis
+# R code for performing multitemporal analysis
 
-install.packages("ggridges") # this is needed to create ridgelines plots
+# install.packages("ggridges") # this is needed to create ridgelines plots
 library(imageRy)
 library(terra)
 library(viridis)
-library(ggridges)
+# library(ggridges)
 
 # Listing the data
 im.list()
@@ -16,23 +16,27 @@ plot(EN_01)
 EN_13 = im.import("EN_13.png") # Marzo diminuzione degli ossidi di azoto
 plot(EN_13)
 
+# Exercise: plot the two images one beside the other
 im.multiframe(1,2)
 plot(EN_01)
 plot(EN_13)
 
 ENdif = EN_01[[1]] - EN_13[[1]] # Giallo valore maggiore durante gennaio. Blu valore maggiore a marzo. Faccio la differenza tra le due immagini che sono RGB e sottraggo il primo livello di ogni immagine.
 plot(ENdif) # Quantità di azoto in quell'immagine
-
 plot(ENdif, col=inferno(100)) # Cambio il colore
 
-#------
+#-------
 
-Greenland ice melt
+# Greenland ice melt
 
 gr = im.import("greenland") # Importo tutte e quattro le immagini della Groenlandia dati di temperatura a 16 bit, programma Copernicus
 
+im.multiframe(1,2)
+plot(gr[[1]], col=rocket(100))
+plot(gr[[4]], col=rocket(100))
+
 grdif = gr[[1]] - gr[[4]] # Differenza tra la prima e l'ultima immagine
-grdif = gr[[1]] - gr[[4]] # 2015 - 2000
+grdif = gr[[4]] - gr[[1]] # 2015 - 2000
 plot(grdif)
 # All the yellow parts are those in which there is a higher value in 2015
 plot(grdif, col=rocket(100))
@@ -51,9 +55,9 @@ im.ridgeline(ndvi, scale=2)
 
 # Changing names
 # sources     : Sentinel2_NDVI_2020-02-21.tif  
-#              Sentinel2_NDVI_2020-05-21.tif  
-#              Sentinel2_NDVI_2020-08-01.tif  
-#              Sentinel2_NDVI_2020-11-27.tif 
+#               Sentinel2_NDVI_2020-05-21.tif  
+#               Sentinel2_NDVI_2020-08-01.tif  
+#               Sentinel2_NDVI_2020-11-27.tif 
 
 names(ndvi) = c("02_Feb", "05_May", "08_Aug", "11_Nov")
 im.ridgeline(ndvi, scale=2) # Frequenze dei vari dataset
