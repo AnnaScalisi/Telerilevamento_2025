@@ -3,7 +3,7 @@
 # install.packages("viridis")
 # install.packages("devtools")
 library(devtools)
-install_github("ducciorocchini/imageRy")
+# install_github("ducciorocchini/imageRy")
 
 library(terra)
 library(imageRy)
@@ -12,16 +12,26 @@ library(viridis)
 # Listing files
 im.list() # tutte le funzioni di imageRy iniziano con im.
 
-# Sentinels-2 bands link: https://dataspace.copernicus.eu/explore-data/data-collections/sentinel-data/sentinel-2b2 <- im.import("sentinel.dolomites.b2.tif") # importo immagine del satellite che prende tutte le lunghezze d'onda e assegno un nome. 
+# Sentinels-2 bands link: https://dataspace.copernicus.eu/explore-data/data-collections/sentinel-data/sentinel-2
 
-b2 = im.import("sentinel.dolomites.b2.tif") # b2 banda del blu
+b2 <- im.import("sentinel.dolomites.b2.tif") # importo immagine del satellite che prende tutte le lunghezze d'onda e assegno un nome. b2 banda de blu
+
+# For the whole course we are going to make use of = instead of <-
+# This is based on the following video:
+# https://www.youtube.com/watch?v=OJMpKCKH1hM
+
+b2 = im.import("sentinel.dolomites.b2.tif") # importo immagine del satellite che prende tutte le lunghezze d'onda e assegno un nome. b2 banda de blu
 plot(b2, col=cl)
 
-cl <- colorRampPalette(c("black", "dark grey", "light grey"))(100) # cambio colori in esterno metto il numero di gamme
+cl = colorRampPalette(c("black", "dark grey", "light grey"))(100) # cambio colori in esterno metto il numero di gamme
 plot(b2, col=cl) # 
 
 cl <- colorRampPalette(c("black", "dark grey", "light grey"))(3) # cambio la gama di colori
 plot(b2, col=cl)
+# tlumley@u.washington.edu, Thomas Lumley
+
+# Exercise: make your own color ramp
+# https://sites.stat.columbia.edu/tzheng/files/Rcolor.pdf
 
 cl <- colorRampPalette(c("blue", "green", "yellow"))(100) # non va bene per i daltonici si azzera il contrasto rosso/verde e rosso/celeste 8% della pop mondiale è daltonica.
 plot(b2, col=cl)
@@ -97,12 +107,15 @@ sentdol = im.import("sentinel.dolomites")
 pairs(sentdol)
 plot(sentdol[[1]]) # plot solo della prima banda
 plot(sentdol[[4]], col=inferno(100))
+
 # viridis
 plot(sentdol, col=viridis(100))
 plot(sentdol, col=mako(100))
 plot(sentdol, col=magma(100))
 
-# Viridis colors: link
+# Viridis colors:
+# https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html
+
 
 nlyr(sentdol) # numero di layer
 ncell(sentdol) # numero totale di pixel
@@ -119,11 +132,14 @@ im.plotRGB(sentdol, r=3, g=2, b=1) # faccio un plot con i colori rosso giallo e 
 
 # False colors
 im.plotRGB(sentdol, r=4, g=3, b=2) # tutte le piante saranno rosse. NIR=842nm estendiamo la visione al NIR. Si vedono le praterie di alta quota e vediamo con una alta risoluzione la vegetazione.
+im.plotRGB(sentdol, r=3, g=4, b=2)
+im.plotRGB(sentdol, r=2, g=4, b=3)
+im.plotRGB(sentdol, r=3, g=4, b=1)
 
 # Exercise: plot the image using the NIR ontop of the green component of the RGB scheme
 im.plotRGB(sentdol, r=3, g=4, b=1) # verde vegetazione riflettanza in infrarosso. Il NIR fa variare il colore.
 
-im.multiframe(1, 2)
+im.multiframe(1,2)
 im.plotRGB(sentdol, r=3, g=4, b=1)
 im.plotRGB(sentdol, r=2, g=4, b=1)
 
