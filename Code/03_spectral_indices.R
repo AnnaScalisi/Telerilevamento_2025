@@ -27,13 +27,35 @@ im.multiframe(1,2)
 im.plotRGB(mato1992, r=2, g=3, b=1, title="Mato Grosso 1992")
 im.plotRGB(mato2006, r=2, g=3, b=1, title="Mato Grosso 2006")
 
+im.multiframe(3,2)
+# NIR ontop of red
+im.plotRGB(mato1992, r=1, g=2, b=3)
+im.plotRGB(mato2006, r=1, g=2, b=3)
+
+# NIR ontop of green
+im.plotRGB(mato1992, r=2, g=1, b=3)
+im.plotRGB(mato2006, r=2, g=1, b=3)
+
+# NIR ontop of blue
+im.plotRGB(mato1992, r=3, g=2, b=1)
+im.plotRGB(mato2006, r=3, g=2, b=1)
+
+# Exercise: plot only the first layer of mato2006
+dev.off()
+
+plot(mato2006[[1]])
+plot(mato2006[[1]], col=magma(100))
+plot(mato2006[[1]], col=mako(100))
+
 # Radiometric resolution uso immagini a 8bit da 0 a 255. Passo da valori con decimali a valori con interi. 
 plot(mato1992[[1]], col=inferno(100))
 plot(mato2006[[1]], col=inferno(100))
 
 # DVI: Difference Vegetation Index.
-# Tree:          NIR=255, red=0, DVI=NIR-red=255-0=255 # indice di salute.
-# Stressed tree: NIR=100, red=20, DVI=NIR-red=100-20=80 # info stato di salute delle piante e quindi di un sistema.
+# E. coli
+# Caribe
+# Tree:          NIR=255 (8 bit), red=0 (8 bit), DVI=NIR-red=255-0=255 # indice di salute.
+# Stressed tree: NIR=100 (8 bit), red=30, DVI=NIR-red=100-30=70 # info stato di salute delle piante e quindi di un sistema.
 
 # Calculating DVI
 
@@ -94,15 +116,19 @@ plot(ndvi2006)
 
 # Functions from imageRy
 dvi1992auto = im.dvi(mato1992, 1, 2)
+dev.off()
 plot(dvi1992auto)
 
 dvi2006auto = im.dvi(mato2006, 1, 2)
+dev.off()
 plot(dvi2006auto)
 
 ndvi1992auto = im.ndvi(mato1992, 1, 2)
+dev.off()
 plot(ndvi1992auto)
 
 ndvi2006auto = im.ndvi(mato2006, 1, 2)
+dev.off()
 plot(ndvi2006auto)
 
 im.multiframe(1,2)
